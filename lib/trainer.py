@@ -56,7 +56,7 @@ class Trainer(object):
 
         fig, axes = plt.subplots(2, 1)
         x_plot = np.arange(end_epoch + 1) + 1
-        print('best recall@20: ', min(recalls), 'best mrr: ', min(mrrs))
+        print('best recall@20: ', max(recalls), 'best mrr: ', max(mrrs))
         sns.lineplot(x=x_plot, y=np.array(train_losses), ax=axes[0])
         sns.lineplot(x=x_plot, y=np.array(valid_losses), ax=axes[0])
         sns.lineplot(x=x_plot, y=np.array(recalls), ax=axes[1])

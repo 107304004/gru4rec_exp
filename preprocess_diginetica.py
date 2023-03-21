@@ -32,6 +32,9 @@ def removeUnpopularItems(data, num):
 ori_data = pd.read_csv(ori_data_path, sep=',')
 ori_data['Time'] = ori_data['Time'].apply(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').timestamp())
 
+# remove unpopular items
+ori_data = removeUnpopularItems(ori_data, args.remove_items)
+
 # split into train, valid, test(?)
 time_max = ori_data['Time'].max()
 session_time_max = ori_data.groupby('SessionID')['Time'].max()
@@ -44,12 +47,12 @@ valid_data = ori_data[np.in1d(ori_data['SessionID'], valid_session_idx)]
 
 # remove short sessions and unpopular items
 train_data = removeShortSessions(train_data)
-train_data = removeUnpopularItems(train_data, args.remove_items)
 valid_data = removeShortSessions(valid_data)
-valid_data = removeUnpopularItems(valid_data, args.remove_items)
+# print(valid_data.shape)
 
-# remove sessions in valid not in train
+# Delete records in validation split where items are not in training split
 valid_data = valid_data[np.in1d(valid_data['ItemID'], train_data['ItemID'])]
+# print(valid_data.shape)
 
 # save to csv
 print('shape of train data: ', train_data.shape)
