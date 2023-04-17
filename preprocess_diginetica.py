@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--remove_items', default=4, type=int)
 args = parser.parse_args()
 
-ori_data_path = './new_diginetica.csv'
+ori_data_path = './dataset/new_diginetica.csv'
 train_data_path = './data/diginetica/train.csv'
 valid_data_path = './data/diginetica/valid.csv'
 test_data_path = './data/diginetica/test.csv'
